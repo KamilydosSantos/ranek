@@ -4,7 +4,7 @@ import HomeView from "../views/HomeView.vue";
 
 Vue.use(VueRouter);
 
-export default new Router({
+export default new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
