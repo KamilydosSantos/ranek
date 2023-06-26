@@ -2,7 +2,9 @@
   <div id="app">
     <TheHeader/>
     <main id="main">
-      <router-view/>
+      <transition mode="out-in">
+        <router-view/>
+      </transition>
     </main>
     <TheFooter/>
   </div>
@@ -55,6 +57,27 @@ img {
   display: block;
 }
 
+label {
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  border-radius: 4px;
+  border: 1px solid white;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, .1);
+  transition: all .3s;
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 15px;
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: 0 6px 12px rgba(30, 60, 90, .2);
+    border-color: #87f;
+  }
+}
 #app {
   display: flex;
   min-height: 100vh;
@@ -80,23 +103,6 @@ img {
     &:hover {
       background: #65d;
       transform: scale(1.1);
-    }
-  }
-  input,
-  textarea {
-    border-radius: 4px;
-    border: 1px solid white;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(30, 60, 90, .1);
-    transition: all .3s;
-    font-size: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 15px;
-    &:hover,
-    &:focus {
-      outline: none;
-      box-shadow: 0 6px 12px rgba(30, 60, 90, .2);
-      border-color: #87f;
     }
   }
 }
