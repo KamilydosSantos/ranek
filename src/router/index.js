@@ -13,5 +13,8 @@ export default new VueRouter({
     name: "home",
     component: HomeView
     },
-  ]
+  ],
+  scrollBehavior() {
+    return window.scrollTo({top: 0, behavior: "smooth"});
+  }
 });
