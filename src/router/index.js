@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import MyProduct from "../views/MyProduct.vue";
 
 Vue.use(VueRouter);
 
@@ -12,6 +13,12 @@ export default new VueRouter({
     path: "/",
     name: "home",
     component: HomeView
+    },
+    {
+      path: "/produto/:id",
+      name: "product",
+      component: MyProduct,
+      props: true
     },
   ],
   scrollBehavior() {
