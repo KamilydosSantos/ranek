@@ -1,7 +1,7 @@
 <template>
     <section class="list-container">
         <div class="products" v-if="products && products.length">
-            <div class="products__product" v-for="product in products" :key="product.id">
+            <div class="products__product" v-for="(product, index) in products" :key="index">
                 <router-link to="/">
                     <img class="products__img" v-if="product.pictures" :src="product.pictures" :alt="product.pictures[0].title">
                     <p class="products__price">{{ product.price }}</p>
@@ -9,6 +9,7 @@
                     <p class="products__description">{{ product.description }}</p>
                 </router-link>
             </div>
+            <PageProducts :totalProducts="totalProducts" :productsPerPage="productsPerPage"/>
         </div>
         <div v-else-if="products && products.length === 0">
             <p class="no-results">Busca sem resultados. Tente buscar outro termo.</p>
@@ -17,27 +18,33 @@
 </template>
 
 <script>
+import PageProducts from "./PageProducts.vue";
 import { api } from "@/services.js";
 import { serialize } from "@/helpers.js"
 
 export default {
   name: "ListProducts",
+  components : {
+    PageProducts,
+  },
   data() {
     return {
         products: null,
-        listLimit: 9,
+        productsPerPage: 9,
+        totalProducts: 0,
     };
   },
   computed: {
     url() {
         const query = serialize(this.$route.query);
-        return `/products?_limit=${this.listLimit}${query}`;
+        return `/products?_limit=${this.productsPerPage}${query}`;
     }
   },
   methods: {
     getProducts() {
         api.get(this.url)
         .then(response => {
+            this.totalProducts = Number(response.headers["x-total-count"]);
             this.products = response.data;
         });
     }
