@@ -7,7 +7,7 @@
         <label for="password">Senha</label>
         <input type="password" id="password" name="password" v-model="password">
         <label for="zip">CEP</label>
-        <input type="text" id="zip" name="zip" v-model="zip">
+        <input type="text" id="zip" name="zip" v-model="zip" @keyup="fillZip">
         <label for="street">Rua</label>
         <input type="text" id="street" name="street" v-model="street">
         <label for="number">Número</label>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import {getZip} from "@/services.js";
+
 export default {
     name: "UserForm",
     computed: {
@@ -98,6 +100,20 @@ export default {
             },
             set(value) {
                 this.$store.commit("UPDATE_USER", {state: value});
+            }
+        }
+    },
+    methods: {
+        fillZip() {
+            const zip = this.zip.replace(/\D/g, "");
+            if(zip.length === 8) {
+                getZip(zip)
+                .then(response => {
+                    this.street = response.data.logradouro;
+                    this.nborhood = response.data.bairro;
+                    this.city = response.data.localidade;
+                    this.state = response.data.uf;
+                })
             }
         }
     }
