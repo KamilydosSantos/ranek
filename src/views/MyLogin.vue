@@ -6,7 +6,7 @@
             <input type="email" name="email" id="email" v-model="login.email">
             <label for="senha">Senha</label>
             <input type="password" name="senha" id="senha" v-model="login.password">
-            <button class="btn" @click.prevent="login">Logar</button>
+            <button class="btn" @click.prevent="loggingIn">Logar</button>
         </form>
         <p class="login__forgot">
             <a href="/" target="_blank">Esqueceu a senha? Clique aqui.</a>
@@ -30,7 +30,13 @@ export default {
                 password: ""
             }
         }
-    } 
+    },
+    methods: {
+        loggingIn() {
+            this.$store.dispatch("getUser", this.login.email);
+            this.$router.push({name: "user"});
+        }
+    }
 }
 </script>
 
