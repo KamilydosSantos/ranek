@@ -9,15 +9,15 @@ export default new Vuex.Store({
     login: false,
     user: {
       id: "",
-      nome: "",
+      name: "",
       email: "",
-      senha: "",
-      cep: "",
-      rua: "",
-      numero: "",
-      bairro: "",
-      cidade: "",
-      estado: ""
+      password: "",
+      zip: "",
+      street: "",
+      number: "",
+      nborhood: "",
+      city: "",
+      state: ""
     }
   },
   mutations: {
