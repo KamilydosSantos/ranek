@@ -1,7 +1,9 @@
 <template>
     <ul class="pages" v-if="totalPages > 1">
         <router-link :to="{query: query(1)}"> ❮ </router-link>
-        <li class="pages__page" v-for="page in pages" :key="page"><router-link class="pages__link" :to="{query: query(page)}">{{ page }}</router-link></li>
+        <li class="pages__page" v-for="page in pages" :key="page">
+            <router-link class="pages__link" :to="{query: query(page)}">{{ page }}</router-link>
+        </li>
         <router-link :to="{query: query(totalPages)}"> ❯ </router-link>
     </ul>
 </template>

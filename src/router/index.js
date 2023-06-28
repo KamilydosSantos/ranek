@@ -4,6 +4,10 @@ import HomeView from "../views/HomeView.vue";
 import MyProduct from "../views/MyProduct.vue";
 import MyLogin from "../views/MyLogin.vue";
 import MyUser from "../views/user/MyUser.vue";
+import UserProducts from "../views/user/UserProducts.vue";
+import UserPurchases from "../views/user/UserPurchases.vue";
+import UserSales from "../views/user/UserSales.vue";
+import EditUser from "../views/user/EditUser.vue";
 
 Vue.use(VueRouter);
 
@@ -29,8 +33,29 @@ export default new VueRouter({
     },
     {
       path: "/user",
-      name: "user",
-      component: MyUser
+      component: MyUser,
+      children: [
+        {
+          path: "",
+          name: "user",
+          component: UserProducts
+        },
+        {
+          path: "purchases",
+          name: "purchases",
+          component: UserPurchases
+        },
+        {
+          path: "sales",
+          name: "sales",
+          component: UserSales
+        },
+        {
+          path: "edit",
+          name: "edit",
+          component: EditUser
+        }
+      ]
     },
   ],
   scrollBehavior() {
