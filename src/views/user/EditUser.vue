@@ -17,17 +17,17 @@ export default {
      },
      methods: {
         updateUser() {
-            const path = this.$store.state.user.id;
-            api.put(`/user/${path}`, this.$store.state.user)
+            api.put(`/user/${this.$store.state.user.id}`, this.$store.state.user)
             .then(() => {
-                this.$store.dispatch("getUser");
-                this.$router.push({name: "user"});
-            }).catch(error => {
+                this.$store.dispatch("getUser", this.$store.state.user.id);
+                this.$router.push({ name: "user" });
+            })
+            .catch(error => {
                 console.log(error.response);
             });
         }
     }
-}
+};
 </script>
 
 <style>
