@@ -25,7 +25,8 @@ export default {
                 name: "",
                 price: "",
                 description: "",
-                pictures: null
+                pictures: null,
+                sold: "false"
             }
         }
     },

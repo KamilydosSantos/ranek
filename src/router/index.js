@@ -5,7 +5,7 @@ import MyProduct from "../views/MyProduct.vue";
 import MyLogin from "../views/MyLogin.vue";
 import MyUser from "../views/user/MyUser.vue";
 import UserProducts from "../views/user/UserProducts.vue";
-import UserPurchases from "../views/user/UserPurchases.vue";
+import UserShopping from "../views/user/UserShopping.vue";
 import UserSales from "../views/user/UserSales.vue";
 import EditUser from "../views/user/EditUser.vue";
 
@@ -41,9 +41,9 @@ export default new VueRouter({
           component: UserProducts
         },
         {
-          path: "purchases",
-          name: "purchases",
-          component: UserPurchases
+          path: "shopping",
+          name: "shopping",
+          component: UserShopping
         },
         {
           path: "sales",

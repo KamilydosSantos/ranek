@@ -6,7 +6,7 @@
                     <router-link class="user__element" :to="{name: 'user'}">Produtos</router-link>
                 </li>
                 <li>
-                    <router-link class="user__element" :to="{name: 'purchases'}">Compras</router-link>
+                    <router-link class="user__element" :to="{name: 'shopping'}">Compras</router-link>
                 </li>
                 <li>
                     <router-link class="user__element" :to="{name: 'sales'}">Vendas</router-link>

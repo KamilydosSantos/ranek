@@ -10,7 +10,10 @@
                 <h1 class="content__name">{{ product.name }}</h1>
                 <p class="content__price">{{ product.price | formattingPrice}}</p>
                 <p class="content__description">{{ product.description }}</p>
-                <button class="btn" v-if="product.sold === 'false'">Comprar</button>
+                <transition v-if="product.sold === 'false'" mode="out-in">
+                    <button class="btn" v-if="!checkout" @click="checkout = true">Comprar</button>
+                    <CheckOut v-else :product="product"/>
+                </transition>
                 <button class="btn" v-else disabled>Produto Vendido</button>
             </div>
         </div>
@@ -20,13 +23,18 @@
 
 <script>
 import { api } from "@/services.js";
+import CheckOut from "@/components/CheckOut.vue";
 
 export default {
     name: "MyProduct",
+    components: {
+        CheckOut
+    },
     props: ["id"],
     data() {
         return {
             product: null,
+            checkout: false,
         }
     },
     methods: {

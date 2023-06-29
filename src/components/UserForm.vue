@@ -1,11 +1,13 @@
 <template>
     <form class="create-form">
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name" v-model="name">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" v-model="email">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" v-model="password">
+        <div class="login-infos" v-if="showLoginInfos">
+            <label for="name">Nome</label>
+            <input type="text" id="name" name="name" v-model="name">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" v-model="email">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" v-model="password">
+        </div>
         <label for="zip">CEP</label>
         <input type="text" id="zip" name="zip" v-model="zip" @keyup="fillZip">
         <label for="street">Rua</label>
@@ -30,6 +32,9 @@ import {getZip} from "@/services.js";
 export default {
     name: "UserForm",
     computed: {
+        showLoginInfos() {
+            return (!this.$store.state.login || (this.$route.name === 'edit'));
+        },
         name: {
             get() {
                 return this.$store.state.user.name;
@@ -101,7 +106,7 @@ export default {
             set(value) {
                 this.$store.commit("UPDATE_USER", {state: value});
             }
-        }
+        },
     },
     methods: {
         fillZip() {
@@ -121,10 +126,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.create-form {
+.create-form,
+.login-infos {
     display: grid;
     grid-template-columns: 80px 1fr;
     align-items: center;
+    .login-infos {
+        grid-column: 1/3;
+    }
     .button {
         grid-column: 2;
         margin-top: 10px;
