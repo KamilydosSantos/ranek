@@ -37,18 +37,37 @@ export default {
     },
     methods: {
         createTransaction() {
-            api.post("/transaction", this.shopping)
+            return api.post("/transaction", this.shopping)
             .then(() => {
                 this.$router.push({name: "shopping"});
             });
         },
+        async createUser() {
+            try {
+                await this.$store.dispatch("createUser", this.$store.state.user);
+                await this.$store.dispatch("getUser", this.$store.state.user.email);
+                await this.createTransaction();
+            } catch(error) {
+                console.log(error);
+            }
+        },
         finishShopping() {
-            this.createTransaction();
+            if (this.$store.state.login) {
+                this.createTransaction();
+            } else {
+                this.createUser();
+            }
         }
     }
 };
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    h2 {
+        margin-bottom: 20px;
+        margin-top: 40px;
+    }
+    .btn {
+        background: #e80;
+    }
 </style>
